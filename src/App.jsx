@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import './App.css';
-import Navbar from './components/navbar';
+import Navbar from './components/Navbar';
+import FilterAndDisplay from './components/FilterAndDisplay';
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
-      <div className="text-3xl font-bold underline header">hello</div>
-      <div className="inline-block">div2</div>
-      <div>div3</div>
-      <div>div4</div>
-    </div>
+      <div>824 toilets and counting. Info comp</div>
+      <FilterAndDisplay />
+      <div className="m-28">map?</div>
+    </>
   );
 }
 
