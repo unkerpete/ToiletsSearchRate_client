@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import './App.css';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import FilterAndDisplay from './components/FilterAndDisplay';
+import UserLoginPage from './pages/UserLoginPage';
+import HomePage from './pages/HomePage';
 
 function App() {
+  const [userLocation, setUserLocation] = useState();
+
   return (
     <>
       <Navbar />
-      <div>824 toilets and counting. Info comp</div>
-      <FilterAndDisplay />
-      <div className="m-28">map?</div>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<UserLoginPage />} />
+      </Routes>
+      <div className="m-28">mapasda?</div>
     </>
   );
 }

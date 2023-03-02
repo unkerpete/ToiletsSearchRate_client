@@ -62,8 +62,7 @@ const FilterAndDisplay = () => {
           <option value="automatic">automatic</option>
         </select>
       </div>
-      <div className="m-28 bg-amber-300">
-        results here
+      <div className="bg-amber-300 grid grid-cols-3 gap-1 lg:gap-8">
         {toiletsResults &&
           toiletsResults
             .filter((item) => {
@@ -81,10 +80,11 @@ const FilterAndDisplay = () => {
                   <img
                     src={item.imgurl}
                     alt={item.location}
-                    width="300"
-                    className="m-auto"
+                    // width="300"
+                    // className="m-auto"
                   />
                   <h3>{`${item.id} ${item.sex} ${item.bidet} ${item._location}`}</h3>
+                  <h3>{`${item._address}`}</h3>
                 </div>
               );
             })}
