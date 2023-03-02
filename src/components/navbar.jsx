@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <>
-      <div className="text-3xl font-bold underline header">
-        <button>login</button>
-        <button>register</button>
+      <div>
+        <Link to="/login" className="m-28">
+          Login
+        </Link>
+        <Link to="/register">Register</Link>
       </div>
     </>
   );

@@ -18,24 +18,39 @@ const UserLoginPage = () => {
   };
 
   return (
-    <div className="mt-28">
+    <div className="max-w-sm mx-auto mt-36">
+      <h1 className="text-2xl font-bold mb-4">Login</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <button type="submit">Login</button>
+        <div className="mb-4">
+          <label className="block font-bold mb-2" htmlFor="username">
+            Username:
+          </label>
+          <input
+            className="border border-gray-400 p-2 w-full rounded"
+            type="text"
+            id="username"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block font-bold mb-2" htmlFor="password">
+            Password:
+          </label>
+          <input
+            className="border border-gray-400 p-2 w-full rounded"
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          type="submit"
+        >
+          Login
+        </button>
       </form>
     </div>
   );
