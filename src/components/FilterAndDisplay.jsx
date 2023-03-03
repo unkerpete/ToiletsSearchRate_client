@@ -4,6 +4,7 @@ const FilterAndDisplay = () => {
   const [toiletsResults, setToiletsResults] = useState([]);
   const [sexFilter, setSexFilter] = useState(null);
   const [bidetFilter, setBidetFilter] = useState(null);
+  const [locationAddressFilter, setlocationAddressFilter] = useState(null);
 
   // on render, fetches all the toilets in database
   const getToilets = async () => {
@@ -38,6 +39,10 @@ const FilterAndDisplay = () => {
     }
   };
 
+  const handleLocationPostalChange = async (e) => {
+    setlocationAddressFilter(e.target.value);
+  };
+
   return (
     <>
       <div className="m-28">
@@ -45,11 +50,9 @@ const FilterAndDisplay = () => {
           className="inline-block mx-auto bg-white border-2 border-gray-300 rounded-md py-2 px-4 w-96 mb-4"
           type="text"
           label="hello"
-          placeholder="search by location or postal code"
+          placeholder="filter by location, address, or postal code"
+          onChange={handleLocationPostalChange}
         />
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Search
-        </button>
         <br />
         <span className="mt-4 mr-2 text-gray-700">Sex</span>
         <select
@@ -82,11 +85,21 @@ const FilterAndDisplay = () => {
               if (bidetFilter && item.bidet !== bidetFilter) {
                 return false;
               }
+              // if locationAddressFilter has value, transform the locationAddressFilter string into Regex and test that against location + address.
+              if (
+                locationAddressFilter &&
+                !new RegExp(
+                  `.*${locationAddressFilter.split('').join('.*')}.*`,
+                  'i'
+                ).test(item._location + item._address)
+              ) {
+                return false;
+              }
               return true;
             })
             .map((item) => {
               return (
-                <div>
+                <div key={item.id}>
                   <img
                     src={item.imgurl}
                     alt={item.location}
