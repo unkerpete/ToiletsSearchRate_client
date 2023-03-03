@@ -17,11 +17,41 @@ const RegisterPage = () => {
     setEmail(e.target.value);
   };
 
+  const registerUser = async () => {
+    try {
+      const res = await fetch('http://127.0.0.1:5001/user/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: `${username}`,
+          email: `${email}`,
+          _password: `${password}`,
+        }),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (data.message === 'user or email already exists') {
+        // some code (modal?) to notify user
+      } else {
+        // some code (modal?) to notify successful create
+        // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
+        // then bring user back to homepage
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      `Username: ${username}, Email: ${email}, Password: ${password}`
-    );
+    registerUser();
+    setUsername('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
