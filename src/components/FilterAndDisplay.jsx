@@ -42,21 +42,29 @@ const FilterAndDisplay = () => {
     <>
       <div className="m-28">
         <input
-          className="block m-auto"
+          className="inline-block mx-auto bg-white border-2 border-gray-300 rounded-md py-2 px-4 w-96 mb-4"
           type="text"
           label="hello"
-          placeholder="location"
+          placeholder="search by location or postal code"
         />
-        <button>Search</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Search
+        </button>
         <br />
-        <span>Sex</span>
-        <select className="border-2 ml-2" onChange={handleSexChange}>
+        <span className="mt-4 mr-2 text-gray-700">Sex</span>
+        <select
+          className="border-2 border-gray-300 rounded-md px-4 py-2 ml-2"
+          onChange={handleSexChange}
+        >
           <option value="all sex">all</option>
           <option value="male">male</option>
           <option value="female">female</option>
         </select>
-        <span>Bidet</span>
-        <select className="border-2 ml-2" onChange={handleBidetChange}>
+        <span className="mt-4 mr-2 text-gray-700">Bidet</span>
+        <select
+          className="border-2 border-gray-300 rounded-md px-4 py-2 ml-2"
+          onChange={handleBidetChange}
+        >
           <option value="all bidets">all</option>
           <option value="manual">manual</option>
           <option value="automatic">automatic</option>
@@ -66,9 +74,11 @@ const FilterAndDisplay = () => {
         {toiletsResults &&
           toiletsResults
             .filter((item) => {
+              // if sexFilter has value, filter out(return false) items that does not have the same value
               if (sexFilter && item.sex !== sexFilter) {
                 return false;
               }
+              // if bidetFilter has value, filter out(return false) items that does not have the same value
               if (bidetFilter && item.bidet !== bidetFilter) {
                 return false;
               }

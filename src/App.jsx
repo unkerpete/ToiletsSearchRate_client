@@ -18,7 +18,6 @@ function App() {
         <Route path="/login" element={<UserLoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
-      <div className="m-28">mapasda?</div>
     </>
   );
 }
