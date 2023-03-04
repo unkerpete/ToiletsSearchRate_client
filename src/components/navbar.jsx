@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ userName }) => {
   return (
     <>
       <div className="flex justify-between">
-        <span className="text-2xl font-bold">{`Welcome, {state here that tracks username or guest}`}</span>
+        <span className="text-2xl font-bold">{`Welcome, ${userName}`}</span>
 
         <div className="flex items-center">
           <Link

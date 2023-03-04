@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const RegisterPage = () => {
+const RegisterPage = ({ handleNavbarUserName }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -41,6 +43,7 @@ const RegisterPage = () => {
         showToastMessage('error', data.message);
       } else {
         // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
+        handleNavbarUserName(data.userName);
 
         // some code (modal?) to notify successful create
         showToastMessage(
@@ -50,7 +53,7 @@ const RegisterPage = () => {
 
         // then bring the new user back to homepage
         setTimeout(() => {
-          window.location.href = '/home';
+          navigate('/home');
         }, 5500);
       }
     } catch (err) {

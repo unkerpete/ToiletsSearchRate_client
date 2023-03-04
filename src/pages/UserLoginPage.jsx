@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const UserLoginPage = () => {
+const UserLoginPage = ({ handleNavbarUserName }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -36,6 +38,10 @@ const UserLoginPage = () => {
         // Store the token in localStorage. TODO: change to saving token in???
         localStorage.setItem('token', token);
 
+        // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
+        handleNavbarUserName(data.username);
+        // localStorage.setItem('username', data.username);
+
         // some code (modal?) to notify user. Decided to use toast library
         showToastMessage(
           'success',
@@ -44,15 +50,11 @@ const UserLoginPage = () => {
 
         // after closing notification, send user back to home page. necessary?
         setTimeout(() => {
-          window.location.href = '/home';
+          navigate('/home');
         }, 5500);
       } else {
         // some code (modal?) to notify user. Decided to use toast library
         showToastMessage('error', 'Invalid email or password');
-
-        // some code (modal?) to notify successful create
-        // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
-        // then bring user back to homepage
       }
     } catch (err) {
       alert(err.message);
