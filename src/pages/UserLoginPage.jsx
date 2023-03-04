@@ -50,7 +50,8 @@ const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
           'You are now logged in! Sending you back to home.'
         );
 
-        // after closing notification, send user back to home page. necessary?
+        // after closing notification, send user back to home page.
+        // TOSOLVE: just logged in admin goes to admin page immediately after logging in. But because of this timeOut code, 5.5 seconds later, the admin will be redirected to the home page. Figure a way to clearTimeOut() the below timeOut code when user navigates away.
         setTimeout(() => {
           navigate('/home');
         }, 5500);
