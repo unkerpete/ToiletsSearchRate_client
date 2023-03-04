@@ -10,12 +10,6 @@ const Navbar = ({ userName, userRole }) => {
         }`}</span>
 
         <div className="flex items-center">
-          <Link
-            to="/home"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-          >
-            Home
-          </Link>
           {userRole === 'admin' && (
             <Link
               to="/wipeskidmarksoff"
@@ -24,6 +18,12 @@ const Navbar = ({ userName, userRole }) => {
               Admin Manage
             </Link>
           )}
+          <Link
+            to="/home"
+            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+          >
+            Home
+          </Link>
           <Link
             to="/login"
             className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
