@@ -41,7 +41,7 @@ const FilterAndDisplay = () => {
 
   const handleLocationPostalChange = (e) => {
     setlocationAddressFilter(e.target.value);
-    console.log(localStorage.getItem('token'));
+    // console.log(localStorage.getItem('token'));
   };
 
   return (

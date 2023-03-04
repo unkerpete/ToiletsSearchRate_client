@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ userName }) => {
+const Navbar = ({ userName, userRole }) => {
   return (
     <>
       <div className="flex justify-between">
-        <span className="text-2xl font-bold">{`Welcome, ${userName}`}</span>
+        <span className="text-2xl font-bold">{`Welcome, ${
+          userName ? userName : 'Guest'
+        }`}</span>
 
         <div className="flex items-center">
           <Link
@@ -14,6 +16,14 @@ const Navbar = ({ userName }) => {
           >
             Home
           </Link>
+          {userRole === 'admin' && (
+            <Link
+              to="/wipeskidmarksoff"
+              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+            >
+              Admin Manage
+            </Link>
+          )}
           <Link
             to="/login"
             className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const UserLoginPage = ({ handleNavbarUserName }) => {
+const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ const UserLoginPage = ({ handleNavbarUserName }) => {
 
         // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
         handleNavbarUserName(data.username);
-        // localStorage.setItem('username', data.username);
+
+        // store role of logged in user in app.jsx state
+        handleUserRole(data.role);
 
         // some code (modal?) to notify user. Decided to use toast library
         showToastMessage(
