@@ -45,7 +45,7 @@ const UserLoginPage = () => {
         // after closing notification, send user back to home page. necessary?
         setTimeout(() => {
           window.location.href = '/home';
-        }, 5000);
+        }, 5500);
       } else {
         // some code (modal?) to notify user. Decided to use toast library
         showToastMessage('error', 'Invalid email or password');

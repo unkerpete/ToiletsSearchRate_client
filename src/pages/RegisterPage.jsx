@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -34,12 +36,22 @@ const RegisterPage = () => {
       const data = await res.json();
       console.log(data);
 
-      if (data.message === 'user or email already exists') {
+      if (data.message === 'Username or email already exists') {
         // some code (modal?) to notify user
+        showToastMessage('error', data.message);
       } else {
-        // some code (modal?) to notify successful create
         // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
-        // then bring user back to homepage
+
+        // some code (modal?) to notify successful create
+        showToastMessage(
+          'success',
+          'You are now registered! Sending you back to home.'
+        );
+
+        // then bring the new user back to homepage
+        setTimeout(() => {
+          window.location.href = '/home';
+        }, 5500);
       }
     } catch (err) {
       alert(err.message);
@@ -54,8 +66,15 @@ const RegisterPage = () => {
     setPassword('');
   };
 
+  const showToastMessage = (type, message) => {
+    toast[type](message, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <div className="max-w-sm mx-auto mt-36">
+      <ToastContainer />
       <h1 className="text-2xl font-bold mb-4">Register</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
