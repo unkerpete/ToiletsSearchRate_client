@@ -39,8 +39,9 @@ const FilterAndDisplay = () => {
     }
   };
 
-  const handleLocationPostalChange = async (e) => {
+  const handleLocationPostalChange = (e) => {
     setlocationAddressFilter(e.target.value);
+    console.log(localStorage.getItem('token'));
   };
 
   return (
