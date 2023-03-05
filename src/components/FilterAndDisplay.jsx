@@ -104,8 +104,8 @@ const FilterAndDisplay = () => {
                   <img
                     src={item.imgurl}
                     alt={item.location}
-                    // width="300"
-                    // className="m-auto"
+                    width="300"
+                    className="m-auto"
                   />
                   <h3>{`${item.id} ${item.sex} ${item.bidet} ${item._location}`}</h3>
                   <h3>{`${item._address}`}</h3>

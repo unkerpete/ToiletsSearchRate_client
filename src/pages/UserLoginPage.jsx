@@ -54,7 +54,7 @@ const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
         // TOSOLVE: just logged in admin goes to admin page immediately after logging in. But because of this timeOut code, 5.5 seconds later, the admin will be redirected to the home page. Figure a way to clearTimeOut() the below timeOut code when user navigates away.
         setTimeout(() => {
           navigate('/home');
-        }, 5500);
+        }, 1000);
       } else {
         // some code (modal?) to notify user. Decided to use toast library
         showToastMessage('error', 'Invalid email or password');
