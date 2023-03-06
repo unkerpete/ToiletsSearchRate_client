@@ -5,9 +5,13 @@ const Navbar = ({ userName, userRole }) => {
   return (
     <>
       <div className="flex justify-between">
-        <span className="text-2xl font-bold">{`Welcome, ${
-          userName ? userName : 'Guest'
-        }`}</span>
+        <span
+          className="text-2xl font-bold"
+          //TODO: remove this onclick. placed here to test access to localstorage items
+          onClick={() => {
+            console.log(localStorage.getItem('token'));
+          }}
+        >{`Welcome, ${userName ? userName : 'Guest'}`}</span>
 
         <div className="flex items-center">
           {userRole === 'admin' && (

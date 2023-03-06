@@ -49,13 +49,12 @@ const AdminPage = () => {
   };
 
   const createToiletAPI = async (newToilet) => {
-    console.log(newToilet);
     try {
-      console.log('create toilet start api running');
       const res = await fetch(`http://127.0.0.1:5001/toilets/createtoilet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify(newToilet),
       });
@@ -77,23 +76,27 @@ const AdminPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify(toiletId),
       });
       const json = await res.json();
-      console.log(json[0].id);
-      setUpdateDeleteInputs({
-        id: json[0].id,
-        imgurl: json[0].imgurl,
-        _location: json[0]._location,
-        sex: json[0].sex,
-        details: json[0].details,
-        bidet: json[0].bidet,
-        _address: json[0]._address,
-        postalcode: json[0].postalcode,
-      });
+      if (!json[0]) {
+        showToastMessage('error', json.message);
+      } else {
+        setUpdateDeleteInputs({
+          id: json[0].id,
+          imgurl: json[0].imgurl,
+          _location: json[0]._location,
+          sex: json[0].sex,
+          details: json[0].details,
+          bidet: json[0].bidet,
+          _address: json[0]._address,
+          postalcode: json[0].postalcode,
+        });
+      }
     } catch (error) {
-      alert(error.message);
+      showToastMessage('error', error.message);
     }
   };
 
@@ -111,6 +114,7 @@ const AdminPage = () => {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify(updateDeleteInputs),
       });
@@ -136,11 +140,16 @@ const AdminPage = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
         },
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      showToastMessage('success', json.message);
+      if (json.message === 'toilet deleted') {
+        showToastMessage('success', json.message);
+      } else if (json.message === 'no toilet with this id') {
+        showToastMessage('error', json.message);
+      }
       setUpdateDeleteInputs({
         id: '',
         imgurl: '',
@@ -452,13 +461,15 @@ const AdminPage = () => {
               </div>
             </form>
             {showDeleteConfirmation && (
-              <div className="mb-10">
-                <p>Are you sure you want to delete this toilet?</p>
+              <div className="mb-10 bg-red-400 w-max mx-auto p-2 rounded">
+                <p className="mb-2">
+                  Are you sure you want to delete this toilet?
+                </p>
                 <button
                   className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400 mr-20"
                   onClick={reallyDeleteToiletAPI}
                 >
-                  Yes
+                  Yes, delete
                 </button>
                 <button
                   className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
