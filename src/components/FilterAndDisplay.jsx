@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ToiletCards from './ToiletCards';
 
 const FilterAndDisplay = () => {
   const [toiletsResults, setToiletsResults] = useState([]);
@@ -99,18 +100,7 @@ const FilterAndDisplay = () => {
               return true;
             })
             .map((item) => {
-              return (
-                <div key={item.id}>
-                  <img
-                    src={item.imgurl}
-                    alt={item.location}
-                    width="300"
-                    className="m-auto"
-                  />
-                  <h3>{`${item.id} ${item.sex} ${item.bidet} ${item._location}`}</h3>
-                  <h3>{`${item._address}`}</h3>
-                </div>
-              );
+              return <ToiletCards item={item} />;
             })}
       </div>
     </>

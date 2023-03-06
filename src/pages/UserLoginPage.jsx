@@ -31,12 +31,13 @@ const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
       });
 
       const data = await res.json();
-      console.log(data);
       const token = data.token;
+      // const role = data.role;
 
       if (data.message === 'Logged in successfully') {
-        // Store the token in localStorage. TODO: change to saving token in???
+        // Store the token and role in localStorage. TODO: change to saving token in???
         localStorage.setItem('token', token);
+        // localStorage.setItem('role', role);
 
         // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
         handleNavbarUserName(data.username);
