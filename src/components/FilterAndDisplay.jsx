@@ -100,7 +100,7 @@ const FilterAndDisplay = () => {
               return true;
             })
             .map((item) => {
-              return <ToiletCards item={item} />;
+              return <ToiletCards item={item} key={item.id} />;
             })}
       </div>
     </>
