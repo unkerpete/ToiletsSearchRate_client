@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ToiletCards from './ToiletCards';
 
-const FilterAndDisplay = () => {
+const FilterAndDisplay = ({ userName }) => {
   const [toiletsResults, setToiletsResults] = useState([]);
   const [sexFilter, setSexFilter] = useState(null);
   const [bidetFilter, setBidetFilter] = useState(null);
@@ -100,7 +100,9 @@ const FilterAndDisplay = () => {
               return true;
             })
             .map((item) => {
-              return <ToiletCards item={item} key={item.id} />;
+              return (
+                <ToiletCards item={item} key={item.id} userName={userName} />
+              );
             })}
       </div>
     </>

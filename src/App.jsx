@@ -25,7 +25,7 @@ function App() {
       <Navbar userName={userName} userRole={userRole} />
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage userName={userName} />} />
         <Route
           path="/login"
           element={

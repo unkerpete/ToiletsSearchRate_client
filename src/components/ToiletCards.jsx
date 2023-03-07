@@ -22,10 +22,14 @@ const ToiletCards = (props) => {
             <ToiletModals
               item={props.item}
               handleCloseModal={handleCloseModal}
+              userName={props.userName}
             />
           )}
         </div>
-        <div className="card-container" onClick={handleCardClicked}>
+        <div
+          className="card-container hover:cursor-pointer"
+          onClick={handleCardClicked}
+        >
           <img src={imgurl} alt={location} width="300" className="m-auto" />
           <h3>{`${id} ${sex} ${bidet} ${_location}`}</h3>
           <h3>{`${_address}`}</h3>
