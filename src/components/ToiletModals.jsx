@@ -7,7 +7,7 @@ import poopIcon from '../assets/icons/poop.png';
 import closeIcon from '../assets/icons/close.png';
 
 const ToiletModals = (props) => {
-  const { id, sex, bidet, _location, _address, imgurl } = props.item;
+  const { id, sex, bidet, _location, _address, imgurl, details } = props.item;
   const [comments, setComments] = useState();
 
   const showToastMessage = (type, message) => {
@@ -74,54 +74,86 @@ const ToiletModals = (props) => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-50 flex justify-center z-10 flex justify-center items-center">
       <ToastContainer />
-      <div className="bg-white rounded-lg p-4 h-5/6 max-h-fit w-1/3 relative">
-        <div className="absolute top-0 right-0 p-4 h-auto w-14 hover:cursor-pointer">
+      <div className="bg-white rounded-lg p-4 h-5/6 w-1/3 relative">
+        <div className="inline-block absolute top-0 right-0 p-4 h-auto w-14 hover:cursor-pointer">
           <img src={closeIcon} alt="" onClick={props.handleCloseModal} />
         </div>
-        <div className="ratingsDisplay-container absolute">
-          <div className="flex items-center mb-2">
-            <img
-              src={heartIcon}
-              alt=""
-              className="inline-block h-auto w-5 hover:cursor-pointer"
-              onClick={handleHeartClicked}
-            />
-            <span className="ml-5">5</span>
+        <span className="absolute top-0 left-4 text-xs">{`Toilet ID: ${id}`}</span>
+        <div className="flex">
+          <div className="img-container inline-block w-80 h-auto">
+            <img src={imgurl} alt="" className="shadow-lg rounded-lg" />
           </div>
-          <div className="flex items-center">
-            <img
-              src={poopIcon}
-              alt=""
-              className="inline-block h-auto w-5 hover:cursor-pointer"
-              onClick={handlePoopClicked}
-            />
-            <span className="ml-5">5</span>
+          <div className="ratingsDisplayAndDetails-container w-1/2 inline-block pl-1">
+            <div className="flex">
+              <div className="flex">
+                <img
+                  src={heartIcon}
+                  alt=""
+                  className="inline-block h-auto w-5 hover:cursor-pointer"
+                  onClick={handleHeartClicked}
+                />
+                <span className="ml-1">5</span>
+              </div>
+              <div className="flex ml-4">
+                <img
+                  src={poopIcon}
+                  alt=""
+                  className="inline-block h-auto w-5 hover:cursor-pointer"
+                  onClick={handlePoopClicked}
+                />
+                <span className="ml-1">5</span>
+              </div>
+            </div>
+            <div className="details-container mt-2 text-left text-xs">
+              <p className="block">
+                <span className="font-bold underline">Location</span>
+                <br />
+                {_location}
+              </p>
+              <p className="block mt-1">
+                <span className="font-bold underline">Sex</span>
+                <br />
+                {sex}
+              </p>
+              <p className="block mt-1">
+                <span className="font-bold underline">Bidet</span>
+                <br />
+                {bidet}
+              </p>
+              <p className="block mt-1">
+                <span className="font-bold underline">Address</span>
+                <br />
+                {_address}
+              </p>
+              <p className="block mt-1 details text-ellipsis overflow-hidden ...">
+                <span className="font-bold underline ">Details</span>
+                <br />
+                {details}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="img-container w-1/2 mx-auto">
-          <img src={imgurl} alt="" className="shadow-lg rounded-lg" />
         </div>
         <div className="newcomment-container">
-          <p className="text-xl text-left font-medium mt-2 px-2">
-            Leave a Comment
+          <p className="text-l text-left font-medium mt-2 px-2">
+            Flush it with praise (or not)
           </p>
           <textarea
             type="text"
             id="newcomment"
-            placeholder="Write your comment here"
-            className="w-full rounded-lg px-3 py-2 mb-1 resize-y border h-10"
+            placeholder="Write your review here"
+            className="w-full rounded-lg px-3 py-2 mb-1 resize-y border h-10 text-sm"
           ></textarea>
         </div>
-        <div className="submitLikeDislike-btns-container flex justify-between">
+        <div className="submitCommentBtn-container text-right text-xs">
           <button
-            className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-lg mt-0"
+            className="bg-green-500 hover:bg-green-600 text-white font-bold px-2 py-1 rounded-lg mt-0"
             onClick={handleSubmitNewCommentClick}
           >
-            Submit
+            Submit Review
           </button>
         </div>
         <div className="comments-container mt-2">
-          <p className="underline text-left mb-2">Comments history</p>
+          <p className="underline text-left mb-2">Reviews</p>
           <div className="overflow-y-scroll h-36">
             {Array.isArray(comments) && comments.length > 0 ? (
               comments.map((item) => {
