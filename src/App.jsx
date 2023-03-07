@@ -11,6 +11,7 @@ function App() {
   const [userLocation, setUserLocation] = useState();
   const [userName, setUserName] = useState(null);
   const [userRole, setUserRole] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleNavbarUserName = (userName) => {
     setUserName(userName);
@@ -20,9 +21,18 @@ function App() {
     setUserRole(role);
   };
 
+  const handleLoginStatus = (boolean) => {
+    setIsLoggedIn(boolean);
+  };
+
   return (
     <>
-      <Navbar userName={userName} userRole={userRole} />
+      <Navbar
+        userName={userName}
+        userRole={userRole}
+        isLoggedIn={isLoggedIn}
+        handleLoginStatus={handleLoginStatus}
+      />
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="/home" element={<HomePage userName={userName} />} />
@@ -32,6 +42,7 @@ function App() {
             <UserLoginPage
               handleNavbarUserName={handleNavbarUserName}
               handleUserRole={handleUserRole}
+              handleLoginStatus={handleLoginStatus}
             />
           }
         />

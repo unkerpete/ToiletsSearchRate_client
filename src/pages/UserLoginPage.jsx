@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
+const UserLoginPage = ({
+  handleNavbarUserName,
+  handleUserRole,
+  handleLoginStatus,
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -39,6 +43,9 @@ const UserLoginPage = ({ handleNavbarUserName, handleUserRole }) => {
         // Store the token and role in localStorage. TODO: change to saving token in???
         localStorage.setItem('token', token);
         localStorage.setItem('username', username);
+
+        // lift logged in status to app.jsx
+        handleLoginStatus(true);
 
         // store newly created username in a state that can be accessed by the Navbar comp so that Navbar can "Welcome <newusername>"
         handleNavbarUserName(data.username);

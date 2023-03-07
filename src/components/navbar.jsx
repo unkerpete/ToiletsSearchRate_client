@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ userName, userRole }) => {
+const Navbar = ({ userName, userRole, isLoggedIn, handleLoginStatus }) => {
+  const logout = () => {
+    handleLoginStatus(false);
+    localStorage.clear();
+  };
+
   return (
     <>
       <div className="flex justify-between">
-        <span
-          className="text-2xl font-bold"
-          //TODO: remove this onclick. placed here to test access to localstorage items
-          onClick={() => {
-            console.log(localStorage.getItem('token'));
-          }}
-        >{`Welcome, ${userName ? userName : 'Guest'}`}</span>
+        <span className="text-2xl font-bold">{`Welcome, ${
+          userName ? userName : 'Guest'
+        }`}</span>
 
         <div className="flex items-center">
           {userRole === 'admin' && (
@@ -28,18 +29,30 @@ const Navbar = ({ userName, userRole }) => {
           >
             Home
           </Link>
-          <Link
-            to="/login"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-          >
-            Register
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              to="/home"
+              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+              onClick={logout}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+            >
+              Login
+            </Link>
+          )}
+          {!isLoggedIn && (
+            <Link
+              to="/register"
+              className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+            >
+              Register
+            </Link>
+          )}
         </div>
       </div>
     </>
