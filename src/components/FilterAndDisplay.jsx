@@ -7,6 +7,10 @@ const FilterAndDisplay = ({ userName }) => {
   const [bidetFilter, setBidetFilter] = useState(null);
   const [locationAddressFilter, setlocationAddressFilter] = useState(null);
 
+  useEffect(() => {
+    getToilets();
+  }, []);
+
   // on render, fetches all the toilets in database
   const getToilets = async () => {
     try {
@@ -18,9 +22,6 @@ const FilterAndDisplay = ({ userName }) => {
       alert(err.message);
     }
   };
-  useEffect(() => {
-    getToilets();
-  }, []);
 
   // changes the sexFilter state upon user selection
   const handleSexChange = (e) => {
@@ -42,12 +43,11 @@ const FilterAndDisplay = ({ userName }) => {
 
   const handleLocationPostalChange = (e) => {
     setlocationAddressFilter(e.target.value);
-    // console.log(localStorage.getItem('token'));
   };
 
   return (
     <>
-      <div className="m-28">
+      <div className="filters-container m-28">
         <input
           className="inline-block mx-auto bg-white border-2 border-gray-300 rounded-md py-2 px-4 w-96 mb-4"
           type="text"
@@ -75,7 +75,7 @@ const FilterAndDisplay = ({ userName }) => {
           <option value="automatic">automatic</option>
         </select>
       </div>
-      <div className="bg-amber-300 grid grid-cols-3 gap-1 lg:gap-8">
+      <div className="display-container bg-amber-300 grid grid-cols-3 gap-1 lg:gap-8">
         {toiletsResults &&
           toiletsResults
             .filter((item) => {

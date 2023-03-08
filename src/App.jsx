@@ -6,6 +6,7 @@ import UserLoginPage from './pages/UserLoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
+import NearestToiletsPage from './pages/NearestToiletsPage';
 
 function App() {
   const [userLocation, setUserLocation] = useState();
@@ -32,10 +33,13 @@ function App() {
         userRole={userRole}
         isLoggedIn={isLoggedIn}
         handleLoginStatus={handleLoginStatus}
+        setUserRole={setUserRole}
+        setUserName={setUserName}
       />
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route path="/home" element={<HomePage userName={userName} />} />
+        <Route path="/nearesttoilets" element={<NearestToiletsPage />} />
         <Route
           path="/login"
           element={
