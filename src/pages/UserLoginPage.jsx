@@ -26,7 +26,6 @@ const UserLoginPage = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: 'Bearer 9999999',
         },
         body: JSON.stringify({
           email: `${email}`,
@@ -60,7 +59,7 @@ const UserLoginPage = ({
         );
 
         // after closing notification, send user back to home page.
-        // TOSOLVE: just logged in admin goes to admin page immediately after logging in. But because of this timeOut code, 5.5 seconds later, the admin will be redirected to the home page. Figure a way to clearTimeOut() the below timeOut code when user navigates away.
+        // TOSOLVE: a just logged in admin goes to admin page immediately after logging in. But because of the below timeOut code, 5.5 seconds later, the admin will be redirected to the home page. Figure a way to clearTimeOut() the below timeOut code when user navigates away.
         setTimeout(() => {
           navigate('/home');
         }, 2000);
@@ -97,10 +96,11 @@ const UserLoginPage = ({
           </label>
           <input
             className="border border-gray-400 p-2 w-full rounded"
-            type="text"
+            type="email"
             id="username"
             value={email}
             onChange={handleEmailChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -113,6 +113,7 @@ const UserLoginPage = ({
             id="password"
             value={password}
             onChange={handlePasswordChange}
+            required
           />
         </div>
         <button

@@ -90,6 +90,7 @@ const RegisterPage = ({ handleNavbarUserName }) => {
             id="username"
             value={username}
             onChange={handleUsernameChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -102,6 +103,7 @@ const RegisterPage = ({ handleNavbarUserName }) => {
             id="email"
             value={email}
             onChange={handleEmailChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -114,6 +116,7 @@ const RegisterPage = ({ handleNavbarUserName }) => {
             id="password"
             value={password}
             onChange={handlePasswordChange}
+            required
           />
         </div>
         <button
