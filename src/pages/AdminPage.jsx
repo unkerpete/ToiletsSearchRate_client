@@ -14,6 +14,8 @@ const AdminPage = () => {
     bidet: 'manual',
     _address: '',
     postalcode: '',
+    latitude: '',
+    longitude: '',
   });
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeleteUserConfirmation, setShowDeleteUserConfirmation] =
@@ -52,6 +54,8 @@ const AdminPage = () => {
       bidet: document.getElementById('bidetAddToilet').value,
       _address: document.getElementById('addressAddToilet').value,
       postalcode: document.getElementById('postalcodeAddToilet').value,
+      latitude: document.getElementById('addlatitude').value,
+      longitude: document.getElementById('addlongitude').value,
     };
     createToiletAPI(newToilet);
   };
@@ -101,6 +105,8 @@ const AdminPage = () => {
           bidet: json[0].bidet,
           _address: json[0]._address,
           postalcode: json[0].postalcode,
+          latitude: json[0].latitude,
+          longitude: json[0].longitude,
         });
       }
     } catch (error) {
@@ -387,6 +393,36 @@ const AdminPage = () => {
                   required
                 />
               </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="latitude"
+                >
+                  Latitude
+                </label>
+                <input
+                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="latitude"
+                  type="text"
+                  placeholder="Enter latitude"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="addlongitude"
+                >
+                  Longitude
+                </label>
+                <input
+                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="addlongitude"
+                  type="text"
+                  placeholder="Enter longitude"
+                  required
+                />
+              </div>
               <div className="flex items-center justify-end">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto"
@@ -397,7 +433,7 @@ const AdminPage = () => {
               </div>
             </form>
           </div>
-          <div className="find-and-deleteorupdate-container mt-10">
+          <div className="find-and-deleteorupdate-container mt-10 px-8 py-8 bg-stone-100">
             <h2 className="text-3xl font-medium mb-4">Update/Delete Toilet</h2>
             <form onSubmit={handleFindToiletIdButton}>
               <input
@@ -546,6 +582,38 @@ const AdminPage = () => {
                   onChange={handleInputChange}
                 />
               </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="latitude"
+                >
+                  Latitude
+                </label>
+                <input
+                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="latitude"
+                  type="text"
+                  placeholder="Enter latitude"
+                  value={updateDeleteInputs.latitude}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 font-bold mb-2"
+                  htmlFor="longitude"
+                >
+                  Longitude
+                </label>
+                <input
+                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="longitude"
+                  type="text"
+                  placeholder="Enter longitude"
+                  value={updateDeleteInputs.longitude}
+                  onChange={handleInputChange}
+                />
+              </div>
             </form>
             {showDeleteConfirmation && (
               <div className="mb-10 bg-red-400 w-max mx-auto p-2 rounded">
@@ -603,21 +671,36 @@ const AdminPage = () => {
               Get User Info
             </button>
           </form>
-          <p>
-            <span className="font-bold">User ID</span>
-            <br />
-            {userInfo.id}
-          </p>
-          <p>
-            <span className="font-bold">Username</span>
-            <br />
-            {userInfo.userName}
-          </p>
-          <p>
-            <span className="font-bold">Email</span>
-            <br />
-            {userInfo.email}
-          </p>
+          <div className="flex justify-center">
+            <table className="divide-y divide-gray-200 ">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    User ID
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Username
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {userInfo.id}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {userInfo.userName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {userInfo.email}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div className="mt-10 font-bold">User's Messages</div>
           <div className="flex justify-center">
             <table className="divide-y divide-gray-200 ">
