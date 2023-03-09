@@ -9,7 +9,6 @@ import AdminPage from './pages/AdminPage';
 import NearestToiletsPage from './pages/NearestToiletsPage';
 
 function App() {
-  const [userLocation, setUserLocation] = useState();
   const [userName, setUserName] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

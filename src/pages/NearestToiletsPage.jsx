@@ -37,27 +37,27 @@ const NearestToiletsPage = () => {
   }, []);
 
   // formula to calculate distance between 2 points based on given coordinates
-  const distanceCal = (lat1, lon1, lat2, lon2, unit) => {
-    let radlat1 = (Math.PI * lat1) / 180;
-    let radlat2 = (Math.PI * lat2) / 180;
-    let radlon1 = (Math.PI * lon1) / 180;
-    let radlon2 = (Math.PI * lon2) / 180;
-    let theta = lon1 - lon2;
-    let radtheta = (Math.PI * theta) / 180;
-    let dist =
-      Math.sin(radlat1) * Math.sin(radlat2) +
-      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    dist = Math.acos(dist);
-    dist = (dist * 180) / Math.PI;
-    dist = dist * 60 * 1.1515;
-    if (unit == 'K') {
-      dist = dist * 1.609344;
-    }
-    if (unit == 'N') {
-      dist = dist * 0.8684;
-    }
-    return dist;
-  };
+  // const distanceCal = (lat1, lon1, lat2, lon2, unit) => {
+  //   let radlat1 = (Math.PI * lat1) / 180;
+  //   let radlat2 = (Math.PI * lat2) / 180;
+  //   let radlon1 = (Math.PI * lon1) / 180;
+  //   let radlon2 = (Math.PI * lon2) / 180;
+  //   let theta = lon1 - lon2;
+  //   let radtheta = (Math.PI * theta) / 180;
+  //   let dist =
+  //     Math.sin(radlat1) * Math.sin(radlat2) +
+  //     Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  //   dist = Math.acos(dist);
+  //   dist = (dist * 180) / Math.PI;
+  //   dist = dist * 60 * 1.1515;
+  //   if (unit == 'K') {
+  //     dist = dist * 1.609344;
+  //   }
+  //   if (unit == 'N') {
+  //     dist = dist * 0.8684;
+  //   }
+  //   return dist;
+  // };
 
   const geoSuccess = (position) => {
     console.log(position);
@@ -107,7 +107,7 @@ const NearestToiletsPage = () => {
   });
 
   return (
-    <>
+    <div className="mt-5 mb-5">
       {userLatitude && userLongitude ? (
         <MapContainer center={[userLatitude, userLongitude]} zoom={17}>
           <TileLayer
@@ -143,7 +143,7 @@ const NearestToiletsPage = () => {
       ) : (
         <p>Loading map...</p>
       )}
-    </>
+    </div>
   );
 };
 
