@@ -206,7 +206,7 @@ const ToiletModals = (props) => {
         </div>
         <div className="newcomment-container">
           <p className="text-l text-left font-medium mt-2 px-2">
-            Flush it with praise (or not)
+            Leave a review:
           </p>
           <textarea
             type="text"

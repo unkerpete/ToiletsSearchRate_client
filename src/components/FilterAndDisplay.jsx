@@ -47,36 +47,57 @@ const FilterAndDisplay = ({ userName }) => {
   return (
     <>
       <div className="filters-container m-8">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="flex items-end">
+            <div className="flex items-center mb-4 space-x-4 pl-1 ">
+              <label className="text-gray-700" htmlFor="sex">
+                Sex:
+              </label>
+              <select
+                id="sex"
+                className="border border-gray-300 rounded-md px-4 py-2"
+                onChange={handleSexChange}
+              >
+                <option value="all sex">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div className="flex items-center ml-4 mb-4 space-x-4">
+              <label className="text-gray-700" htmlFor="bidet">
+                Bidet:
+              </label>
+              <select
+                id="bidet"
+                className="border border-gray-300 rounded-md px-4 py-2"
+                onChange={handleBidetChange}
+              >
+                <option value="all bidets">All</option>
+                <option value="manual">Manual</option>
+                <option value="automatic">Automatic</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <a
+              href="https://www.kohler.co.in/browse/Bathroom/Toilets"
+              target="_blank"
+            >
+              <img
+                src="https://iili.io/HXCDp6b.jpg"
+                alt=""
+                className="max-w-full"
+              />
+            </a>
+          </div>
+        </div>
         <input
-          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+          className="w-full px-4 py-2 mb-1 mt-5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
           type="text"
           placeholder="Search by location, address, or postal code"
           onChange={handleLocationPostalChange}
         />
-
-        <div className="flex items-center justify-start mb-4 space-x-4 pl-3">
-          <span className="text-gray-700">Sex:</span>
-          <select
-            className="border border-gray-300 rounded-md px-4 py-2"
-            onChange={handleSexChange}
-          >
-            <option value="all sex">All</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-
-        <div className="flex items-center justify-start mb-4 space-x-4">
-          <span className="text-gray-700">Bidet:</span>
-          <select
-            className="border border-gray-300 rounded-md px-4 py-2"
-            onChange={handleBidetChange}
-          >
-            <option value="all bidets">All</option>
-            <option value="manual">Manual</option>
-            <option value="automatic">Automatic</option>
-          </select>
-        </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
         {toiletsResults &&

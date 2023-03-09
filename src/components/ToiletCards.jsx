@@ -32,7 +32,7 @@ const ToiletCards = (props) => {
         >
           <img src={imgurl} alt={location} width="350" className="m-auto" />
           <h3 className="text-xl font-semibold text-gray-800">{_location}</h3>
-          <h3 className="text-xs font-semibold text-gray-800">{`${sex} toilet with ${bidet} bidet`}</h3>
+          <h3 className="text-xs font-semibold text-gray-800">{`[${id}]. ${sex} toilet with ${bidet} bidet`}</h3>
           <h3 className="text-gray-600">{`${_address}`}</h3>
         </div>
       </div>

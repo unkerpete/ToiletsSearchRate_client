@@ -44,11 +44,11 @@ const Navbar = ({
   return (
     <>
       <ToastContainer />
-      <div className="flex justify-between sticky top-0 bg-white h-16 shadow-md rounded">
+      <div className="flex justify-between sticky top-0 bg-white h-16 shadow-md rounded z-10">
         <span className="flex items-center ml-4 text-2xl font-bold text-gray-800">
-          {`Welcome ${
+          {`Welcome, ${
             userName ? userName : 'Guest'
-          }, check out these ${toiletsCount} toilets.`}
+          }. We have ${toiletsCount} toilets for you.`}
         </span>
         <div className="flex items-center mr-4">
           <Link
