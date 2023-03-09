@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import 'leaflet/dist/leaflet.css'; // import the leaflet css. Do we need to? TODO try remove
+import 'leaflet/dist/leaflet.css'; // import the leaflet css
 import userLocationPinIcon from '../assets/icons/pin.png';
 import unisexIcon from '../assets/icons/unisex.png';
 import manIcon from '../assets/icons/man.png';
@@ -38,7 +38,7 @@ const NearestToiletsPage = () => {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
   }, []);
 
-  // formula to calculate distance between 2 points based on given coordinates
+  // UNUSED formula to calculate distance between 2 points based on given coordinates
   // const distanceCal = (lat1, lon1, lat2, lon2, unit) => {
   //   let radlat1 = (Math.PI * lat1) / 180;
   //   let radlat2 = (Math.PI * lat2) / 180;
