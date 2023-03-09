@@ -48,7 +48,7 @@ const ToiletMapModal = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <div className="text-center">{_location}</div>
       <div className="text-center">{_address}</div>
       <br />
@@ -56,7 +56,7 @@ const ToiletMapModal = (props) => {
       <br />
       <span>Sex: {sex}</span>
       <div>
-        <img src={imgurl} alt="" className="rounded" />
+        <img src={imgurl} alt="" className="rounded h-auto" />
       </div>
       <div className="text-center text-xs">Toilet ID [ {id} ]</div>
       <div className="text-center">

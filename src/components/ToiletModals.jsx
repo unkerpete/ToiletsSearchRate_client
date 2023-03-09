@@ -135,7 +135,7 @@ const ToiletModals = (props) => {
             <img src={imgurl} alt="" className="shadow-lg rounded-lg" />
           </div>
           <div className="ratingsDisplayAndDetails-container w-1/2 inline-block pl-3">
-            <div className="flex">
+            {/* <div className="flex">
               <div className="flex">
                 <img
                   src={heartIcon}
@@ -154,7 +154,7 @@ const ToiletModals = (props) => {
                 />
                 <span className="ml-1">{dislikes}</span>
               </div>
-            </div>
+            </div> */}
             <div className="details-container mt-2 text-left text-sm">
               <p className="block">
                 <span className="font-bold underline">Location</span>
@@ -182,6 +182,26 @@ const ToiletModals = (props) => {
                 {details}
               </p>
             </div>
+          </div>
+        </div>
+        <div className="flex w-1/2 mt-2 justify-center">
+          <div className="flex">
+            <img
+              src={heartIcon}
+              alt=""
+              className="inline-block h-auto w-5 hover:cursor-pointer"
+              onClick={handleHeartClicked}
+            />
+            <span className="ml-1">{likes}</span>
+          </div>
+          <div className="flex ml-4">
+            <img
+              src={poopIcon}
+              alt=""
+              className="inline-block h-auto w-5 hover:cursor-pointer"
+              onClick={handlePoopClicked}
+            />
+            <span className="ml-1">{dislikes}</span>
           </div>
         </div>
         <div className="newcomment-container">

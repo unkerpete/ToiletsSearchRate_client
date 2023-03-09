@@ -75,7 +75,7 @@ const FilterAndDisplay = ({ userName }) => {
           <option value="automatic">automatic</option>
         </select>
       </div>
-      <div className="display-container bg-amber-300 grid grid-cols-3 gap-1 lg:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
         {toiletsResults &&
           toiletsResults
             .filter((item) => {
@@ -101,7 +101,12 @@ const FilterAndDisplay = ({ userName }) => {
             })
             .map((item) => {
               return (
-                <ToiletCards item={item} key={item.id} userName={userName} />
+                <div
+                  className="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out"
+                  key={item.id}
+                >
+                  <ToiletCards item={item} userName={userName} />
+                </div>
               );
             })}
       </div>

@@ -133,7 +133,7 @@ const NearestToiletsPage = () => {
                 }
                 key={toilet.id}
               >
-                <Popup maxWidth={800}>
+                <Popup>
                   <ToiletMapModal item={toilet} />
                 </Popup>
               </Marker>
