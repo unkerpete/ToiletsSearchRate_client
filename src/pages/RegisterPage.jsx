@@ -48,13 +48,8 @@ const RegisterPage = ({ handleNavbarUserName }) => {
         // some code (modal?) to notify successful create
         showToastMessage(
           'success',
-          'You are now registered! Sending you back to home.'
+          'You are now registered! Please try logging in.'
         );
-
-        // then bring the new user back to homepage
-        setTimeout(() => {
-          navigate('/home');
-        }, 5500);
       }
     } catch (err) {
       alert(err.message);
