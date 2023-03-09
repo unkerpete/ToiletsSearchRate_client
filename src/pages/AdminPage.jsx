@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,6 +16,14 @@ const AdminPage = () => {
     postalcode: '',
   });
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [showDeleteUserConfirmation, setShowDeleteUserConfirmation] =
+    useState(false);
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+    userName: '',
+    email: '',
+  });
+  const [userMessages, setUserMessages] = useState();
 
   // handles success/errors of admin actions
   const showToastMessage = (type, message) => {
@@ -161,6 +169,85 @@ const AdminPage = () => {
         postalcode: '',
       });
       setShowDeleteConfirmation(false);
+    } catch (error) {
+      showToastMessage('error', json);
+    }
+  };
+
+  const handleFindUserButton = async (e) => {
+    e.preventDefault();
+    let data = {
+      userName: document.getElementById('username').value,
+    };
+    try {
+      const resUserInfo = await fetch(`http://127.0.0.1:5001/user/find`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify(data),
+      });
+
+      const userInfoJson = await resUserInfo.json();
+      setUserInfo({
+        id: userInfoJson[0].id,
+        userName: userInfoJson[0].username,
+        email: userInfoJson[0].email,
+      });
+
+      const resUserMessages = await fetch(
+        `http://127.0.0.1:5001/comments/getusercomments/${
+          document.getElementById('username').value
+        }`,
+        {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+
+      const userMessagesJson = await resUserMessages.json();
+      console.log(userMessagesJson);
+      setUserMessages(userMessagesJson);
+    } catch (error) {
+      showToastMessage('error', 'no such user');
+    }
+  };
+
+  const handleDeleteUserClicked = async () => {
+    if (!userInfo.userName) {
+      showToastMessage('error', 'Please enter a username');
+    } else {
+      setShowDeleteUserConfirmation(!showDeleteUserConfirmation);
+    }
+  };
+
+  const reallyDeleteUserAPI = async () => {
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:5001/user/delete/${userInfo.userName}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      const json = await res.json();
+      if (json.message === 'user deleted') {
+        showToastMessage('success', json.message);
+      } else showToastMessage('error', json.message);
+
+      document.getElementById('username').value = '';
+      setUserInfo({
+        id: '',
+        userName: '',
+        email: '',
+      });
+      setUserMessages(null);
+      setShowDeleteUserConfirmation(false);
     } catch (error) {
       showToastMessage('error', json);
     }
@@ -500,123 +587,106 @@ const AdminPage = () => {
       )}
       {showUserMgmt && (
         <div className="usermgmt-container">
-          what should i let admin do in user management? Delete user? Show all
-          of user's likes and comments?
-          <div className="w-1/3 bg-white px-8 py-8">
-            <form>
-              <h2 className="text-3xl font-medium mb-4">Add User</h2>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="imgurl"
-                >
-                  Image URL
-                </label>
-                <input
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="imgurl"
-                  type="text"
-                  placeholder="Enter Image URL"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="location"
-                >
-                  Location
-                </label>
-                <input
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="location"
-                  type="text"
-                  placeholder="Enter Location"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="location"
-                >
-                  Sex
-                </label>
-                <select
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="sex"
-                  defaultValue="male"
-                >
-                  <option value="male">male</option>
-                  <option value="female">female</option>
-                  <option value="unisex">unisex</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="details"
-                >
-                  Details
-                </label>
-                <input
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="details"
-                  type="text"
-                  placeholder="Enter Details"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="bidet"
-                >
-                  Bidet
-                </label>
-                <select
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="bidet"
-                  defaultValue="manual"
-                >
-                  <option value="manual">manual</option>
-                  <option value="automatic">automatic</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="address"
-                >
-                  Address
-                </label>
-                <input
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="address"
-                  type="text"
-                  placeholder="Enter Address"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-2"
-                  htmlFor="postalcode"
-                >
-                  Postal Code
-                </label>
-                <input
-                  className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="postalcode"
-                  type="text"
-                  placeholder="Enter Postal Code"
-                />
-              </div>
-              <div className="flex items-center justify-end">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mx-auto"
-                  type="button"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+          <h2 className="text-3xl font-medium mb-4">Find User</h2>
+          <form onSubmit={handleFindUserButton}>
+            <input
+              className="appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              placeholder="Enter username"
+              required
+            />
+            <button
+              className="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 mb-4 mx-auto"
+              type="submit"
+            >
+              Get User Info
+            </button>
+          </form>
+          <p>
+            <span className="font-bold">User ID</span>
+            <br />
+            {userInfo.id}
+          </p>
+          <p>
+            <span className="font-bold">Username</span>
+            <br />
+            {userInfo.userName}
+          </p>
+          <p>
+            <span className="font-bold">Email</span>
+            <br />
+            {userInfo.email}
+          </p>
+          <div className="mt-10 font-bold">User's Messages</div>
+          <div className="flex justify-center">
+            <table className="divide-y divide-gray-200 ">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Message ID
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Toilet ID
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Created At
+                  </th>
+                  <th className="px-6 py-3 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Message
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {Array.isArray(userMessages)
+                  ? userMessages.map((item) => {
+                      return (
+                        <tr key={item.id}>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {item.id}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {item.toilets_id}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {item.created_at}
+                          </td>
+                          <td className="px-6 py-4 whitespace-wrap text-sm text-gray-500">
+                            {item.message}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : null}
+              </tbody>
+            </table>
+          </div>
+
+          {showDeleteUserConfirmation && (
+            <div className="mb-10 bg-red-400 w-max mx-auto p-2 rounded">
+              <p className="mb-2">Are you sure you want to delete this user?</p>
+              <button
+                className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400 mr-20"
+                onClick={reallyDeleteUserAPI}
+              >
+                Yes, delete
+              </button>
+              <button
+                className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+                onClick={handleDeleteUserClicked}
+              >
+                No
+              </button>
+            </div>
+          )}
+          <div className="items-center">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2"
+              type="button"
+              onClick={handleDeleteUserClicked}
+            >
+              Delete User
+            </button>
           </div>
         </div>
       )}
