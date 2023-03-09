@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css'; // import the leaflet css. Do we need to? TODO try remove
+import userLocationPinIcon from '../assets/icons/pin.png';
+import unisexIcon from '../assets/icons/unisex.png';
+import manIcon from '../assets/icons/man.png';
+import girlIcon from '../assets/icons/girl.png';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'; //MapContainer component needed to contain/wrap the map and specify initial center and zoom level. TileLayer is a component that renders a map layer consisting of a set of map tiles. Tiles are small images of maps that are combined together to form a larger map image
+import ToiletMapModal from '../components/ToiletMapModal';
+import { Icon } from 'leaflet';
 
-const NearestToiletsPage = ({ toilets }) => {
+const NearestToiletsPage = () => {
   const [toiletResults, setToiletResults] = useState([]);
   const [userLatitude, setUserLatitude] = useState();
   const [userLongitude, setUserLongitude] = useState();
@@ -53,7 +59,6 @@ const NearestToiletsPage = ({ toilets }) => {
     return dist;
   };
 
-  //
   const geoSuccess = (position) => {
     console.log(position);
     console.log(position.coords.latitude);
@@ -80,6 +85,27 @@ const NearestToiletsPage = ({ toilets }) => {
     console.log(error);
   };
 
+  // Custom icons
+  const userLocationPin = new Icon({
+    iconUrl: userLocationPinIcon,
+    iconSize: [38, 38],
+  });
+
+  const unisexPin = new Icon({
+    iconUrl: unisexIcon,
+    iconSize: [38, 38],
+  });
+
+  const manPin = new Icon({
+    iconUrl: manIcon,
+    iconSize: [38, 38],
+  });
+
+  const femalePin = new Icon({
+    iconUrl: girlIcon,
+    iconSize: [38, 38],
+  });
+
   return (
     <>
       {userLatitude && userLongitude ? (
@@ -88,10 +114,28 @@ const NearestToiletsPage = ({ toilets }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          <Marker
+            position={[userLatitude, userLongitude]}
+            icon={userLocationPin}
+          >
+            <Popup>Here's you!</Popup>
+          </Marker>
           {toiletResults.map((toilet) => {
             return (
-              <Marker position={[toilet.latitude, toilet.longitude]}>
-                <Popup>{toilet.latitude}</Popup>
+              <Marker
+                position={[toilet.latitude, toilet.longitude]}
+                icon={
+                  toilet.sex === 'male'
+                    ? manPin
+                    : toilet.sex === 'female'
+                    ? femalePin
+                    : unisexPin
+                }
+                key={toilet.id}
+              >
+                <Popup maxWidth={800}>
+                  <ToiletMapModal item={toilet} />
+                </Popup>
               </Marker>
             );
           })}
