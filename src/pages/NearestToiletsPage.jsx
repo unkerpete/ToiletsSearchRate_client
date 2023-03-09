@@ -8,6 +8,8 @@ import girlIcon from '../assets/icons/girl.png';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'; //MapContainer component needed to contain/wrap the map and specify initial center and zoom level. TileLayer is a component that renders a map layer consisting of a set of map tiles. Tiles are small images of maps that are combined together to form a larger map image
 import ToiletMapModal from '../components/ToiletMapModal';
 import { Icon } from 'leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
+import 'react-leaflet-cluster/lib/assets/MarkerCluster.Default.css';
 
 const NearestToiletsPage = () => {
   const [toiletResults, setToiletResults] = useState([]);
@@ -109,7 +111,7 @@ const NearestToiletsPage = () => {
   return (
     <div className="mt-5 mb-5">
       {userLatitude && userLongitude ? (
-        <MapContainer center={[userLatitude, userLongitude]} zoom={17}>
+        <MapContainer center={[userLatitude, userLongitude]} zoom={18}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -120,25 +122,27 @@ const NearestToiletsPage = () => {
           >
             <Popup>Here's you!</Popup>
           </Marker>
-          {toiletResults.map((toilet) => {
-            return (
-              <Marker
-                position={[toilet.latitude, toilet.longitude]}
-                icon={
-                  toilet.sex === 'male'
-                    ? manPin
-                    : toilet.sex === 'female'
-                    ? femalePin
-                    : unisexPin
-                }
-                key={toilet.id}
-              >
-                <Popup>
-                  <ToiletMapModal item={toilet} />
-                </Popup>
-              </Marker>
-            );
-          })}
+          <MarkerClusterGroup>
+            {toiletResults.map((toilet) => {
+              return (
+                <Marker
+                  position={[toilet.latitude, toilet.longitude]}
+                  icon={
+                    toilet.sex === 'male'
+                      ? manPin
+                      : toilet.sex === 'female'
+                      ? femalePin
+                      : unisexPin
+                  }
+                  key={toilet.id}
+                >
+                  <Popup>
+                    <ToiletMapModal item={toilet} />
+                  </Popup>
+                </Marker>
+              );
+            })}
+          </MarkerClusterGroup>
         </MapContainer>
       ) : (
         <p>Loading map...</p>

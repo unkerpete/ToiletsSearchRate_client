@@ -50,7 +50,7 @@ const FilterAndDisplay = ({ userName }) => {
         <input
           className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
           type="text"
-          placeholder="Filter by location, address, or postal code"
+          placeholder="Search by location, address, or postal code"
           onChange={handleLocationPostalChange}
         />
 
@@ -78,34 +78,6 @@ const FilterAndDisplay = ({ userName }) => {
           </select>
         </div>
       </div>
-      {/* <div className="filters-container m-28">
-        <input
-          className="inline-block mx-auto bg-white border-2 border-gray-300 rounded-md py-2 px-4 w-96 mb-4"
-          type="text"
-          label="hello"
-          placeholder="filter by location, address, or postal code"
-          onChange={handleLocationPostalChange}
-        />
-        <br />
-        <span className="mt-4 mr-2 text-gray-700">Sex</span>
-        <select
-          className="border-2 border-gray-300 rounded-md px-4 py-2 ml-2"
-          onChange={handleSexChange}
-        >
-          <option value="all sex">all</option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-        </select>
-        <span className="mt-4 mr-2 text-gray-700">Bidet</span>
-        <select
-          className="border-2 border-gray-300 rounded-md px-4 py-2 ml-2"
-          onChange={handleBidetChange}
-        >
-          <option value="all bidets">all</option>
-          <option value="manual">manual</option>
-          <option value="automatic">automatic</option>
-        </select>
-      </div> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
         {toiletsResults &&
           toiletsResults

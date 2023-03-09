@@ -53,7 +53,7 @@ const Navbar = ({
         <div className="flex items-center mr-4">
           <Link
             to="/nearesttoilets"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+            className="mr-4 px-3 py-1 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold hover:from-green-500 hover:to-blue-600"
           >
             Toilets Map
           </Link>
@@ -103,65 +103,6 @@ const Navbar = ({
           )}
         </div>
       </div>
-      {/* <ToastContainer />
-      <div className="flex justify-between sticky top-0 bg-white h-10">
-        <span className="text-2xl font-bold">{`Welcome, ${
-          userName ? userName : 'Guest'
-        }`}</span>
-
-        <div className="flex items-center">
-          <Link
-            to="/nearesttoilets"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-          >
-            Nearest Toilets
-          </Link>
-          {userRole === 'admin' && (
-            <Link
-              to="/wipeskidmarksoff"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-            >
-              Admin Manage
-            </Link>
-          )}
-          <Link
-            to="/home"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-              });
-            }}
-          >
-            Home
-          </Link>
-          {isLoggedIn ? (
-            <Link
-              to="/home"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-              onClick={logout}
-            >
-              Logout
-            </Link>
-          ) : (
-            <Link
-              to="/login"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-            >
-              Login
-            </Link>
-          )}
-          {!isLoggedIn && (
-            <Link
-              to="/register"
-              className="px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
-            >
-              Register
-            </Link>
-          )}
-        </div>
-      </div> */}
     </>
   );
 };
