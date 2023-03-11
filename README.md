@@ -10,20 +10,21 @@ The repo for the backend is at https://github.com/unkerpete/toilets_backend.
 
 ## Quick Demo
 
-Browse through Toilet Cards
-</br>
+### Browse through Toilet Cards
 <img width="470" alt="image" src="https://user-images.githubusercontent.com/118168304/224464130-b69daab1-1758-42fe-8a8a-f013dd3cf988.png">
-</br>
-</br>
-Reviewing, liking/disliking a toilet. See others' reviews
-</br>
+
+### Reviewing, liking/disliking a toilet. See others' reviews
 <img width="904" alt="image" src="https://user-images.githubusercontent.com/118168304/224464224-6e5b9a56-7c1c-4120-baad-a5a0698780d1.png">
-</br>
-</br>
-Toilet map showing user geolocation and toilet markers
-</br>
+
+### Toilet map showing user geolocation and toilet markers
 <img width="480" alt="image" src="https://user-images.githubusercontent.com/118168304/224464159-4d6a150c-a1df-401f-be5d-126fc5532bb8.png">
- 
+
+### Admin Management ( Toilet management to CRUD Toilets)
+<img width="319" alt="image" src="https://user-images.githubusercontent.com/118168304/224464418-feaba07d-27fa-40b6-bd8c-2773571f92f4.png">
+
+### Admin Management ( User management to see specific user's reviews and moderate)
+<img width="704" alt="image" src="https://user-images.githubusercontent.com/118168304/224464467-a518e09a-9de1-4b2c-a6b2-5187a5cf4ba9.png">
+
 ## Installation
 At the frontend:
 - npm create vite@latest
