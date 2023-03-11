@@ -7,6 +7,22 @@ Users can browse through toilet cards and each of these cards will have informat
 - reviews of that toilet from other registered users
 
 The repo for the backend is at https://github.com/unkerpete/toilets_backend.
+
+## Quick Demo
+
+Browse through Toilet Cards
+</br>
+<img width="470" alt="image" src="https://user-images.githubusercontent.com/118168304/224464130-b69daab1-1758-42fe-8a8a-f013dd3cf988.png">
+</br>
+</br>
+Reviewing, liking/disliking a toilet. See others' reviews
+</br>
+<img width="904" alt="image" src="https://user-images.githubusercontent.com/118168304/224464224-6e5b9a56-7c1c-4120-baad-a5a0698780d1.png">
+</br>
+</br>
+Toilet map showing user geolocation and toilet markers
+</br>
+<img width="480" alt="image" src="https://user-images.githubusercontent.com/118168304/224464159-4d6a150c-a1df-401f-be5d-126fc5532bb8.png">
  
 ## Installation
 At the frontend:
