@@ -91,6 +91,12 @@ The following endpoints are available:
 ## Further work
 - Switch to google Oauth
 - Responsive styling for mobile phones
+- Introduce community-moderated system for toilets (goal is to reduce admin's work) 
+  - Users can upload toilets.
+  - Toilets uploaded by users are not immediately displayed on the main page.
+  - Instead, they need to be approved by other registered users.
+  - For a toilet to be displayed on the main page, it needs to have received more than 10 approvals from other registered users.
+
 
 
 
