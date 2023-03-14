@@ -44,30 +44,30 @@ const Navbar = ({
   return (
     <>
       <ToastContainer />
-      <div className="flex justify-between sticky top-0 bg-white h-16 shadow-md rounded z-10">
-        <span className="flex items-center ml-4 text-2xl font-bold text-gray-800">
+      <div className="flex flex-wrap sticky top-0 bg-white shadow-md rounded z-10 h-auto sm:p-5">
+        <span className="flex items-center m-2 text-2xl font-bold text-gray-800">
           {`Welcome, ${
             userName ? userName : 'Guest'
           }. We have ${toiletsCount} toilets for you.`}
         </span>
-        <div className="flex items-center mr-4">
+        <div className="flex flex-wrap items-center sm:w-auto w-full sm:pl-0 pl-4 m-5">
           <Link
             to="/nearesttoilets"
-            className="mr-4 px-3 py-1 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold hover:from-green-500 hover:to-blue-600"
+            className="m-2 mr-4 px-3 py-1 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold hover:from-green-500 hover:to-blue-600"
           >
             Toilets Map
           </Link>
           {userRole === 'admin' && (
             <Link
               to="/wipeskidmarksoff"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+              className="m-2 mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
             >
               Admin Manage
             </Link>
           )}
           <Link
             to="/home"
-            className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+            className="m-2 mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
             onClick={() => {
               window.scrollTo({
                 top: 0,
@@ -80,7 +80,7 @@ const Navbar = ({
           {isLoggedIn ? (
             <Link
               to="/home"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+              className="m-2 mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
               onClick={logout}
             >
               Logout
@@ -88,7 +88,7 @@ const Navbar = ({
           ) : (
             <Link
               to="/login"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+              className="m-2 mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
             >
               Login
             </Link>
@@ -96,7 +96,7 @@ const Navbar = ({
           {!isLoggedIn && (
             <Link
               to="/register"
-              className="mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
+              className="m-2 mr-4 px-3 py-1 rounded-lg bg-gray-300 hover:bg-gray-400"
             >
               Register
             </Link>

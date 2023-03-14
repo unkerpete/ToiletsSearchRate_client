@@ -19,12 +19,16 @@ const ToiletModals = (props) => {
   };
 
   const getCommentsAPI = async () => {
+    console.log('1');
     try {
       const res = await fetch(
         `http://127.0.0.1:5001/comments/getcomments/${id}`
       );
       const json = await res.json();
+      console.log(json);
+      console.log('2');
       setComments(json);
+      console.log('3');
     } catch (err) {
       alert(err.message);
     }
@@ -100,11 +104,16 @@ const ToiletModals = (props) => {
       const json = await res.json();
       if (json.message === 'message created') {
         showToastMessage('success', json.message);
-      } else {
+      } else if (
+        json ===
+        'null value in column "users_username" of relation "messages" violates not-null constraint'
+      ) {
         showToastMessage(
           'error',
           'You need to be signed in to submit a comment.'
         );
+      } else {
+        showToastMessage('error', json);
       }
       document.getElementById('newcomment').value = '';
     } catch (err) {
@@ -123,9 +132,9 @@ const ToiletModals = (props) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-50 flex justify-center z-10 flex justify-center items-center">
+    <div className="text-xs sm:text-base fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-50 flex justify-center z-10 flex justify-center items-center">
       <ToastContainer />
-      <div className="bg-white rounded-lg p-4 h-5/6 w-2/5 relative">
+      <div className="bg-white rounded-lg p-4 h-5/6 w-4/5 md:w-2/5 relative">
         <div className="inline-block absolute top-0 right-0 p-4 h-auto w-14 hover:cursor-pointer">
           <img src={closeIcon} alt="" onClick={props.handleCloseModal} />
         </div>
@@ -134,7 +143,7 @@ const ToiletModals = (props) => {
           <div className="img-container inline-block w-1/2">
             <img src={imgurl} alt="" className="shadow-lg rounded-lg" />
           </div>
-          <div className="ratingsDisplayAndDetails-container w-1/2 inline-block pl-3">
+          <div className="ratingsDisplayAndDetails-container w-1/2 md:inline-block pl-3">
             {/* <div className="flex">
               <div className="flex">
                 <img
@@ -231,7 +240,8 @@ const ToiletModals = (props) => {
                 return (
                   <p className="text-left" key={item.id}>
                     <span className="font-bold">{item.users_username}</span>{' '}
-                    {moment(item.created_at).format('DD/MM/YY')}: {item.message}
+                    {/* {moment(item.created_at).format('DD/MM/YY')}: {item.message} */}
+                    : {item.message}
                   </p>
                 );
               })
