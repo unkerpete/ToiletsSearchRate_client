@@ -140,27 +140,27 @@ const FilterAndDisplay = ({ userName }) => {
             })}
       </div>
       <div>
-        {toiletsResults.filter((item) => {
-          // if sexFilter has value, filter out(return false) items that does not have the same value
-          if (sexFilter && item.sex !== sexFilter) {
-            return false;
-          }
-          // if bidetFilter has value, filter out(return false) items that does not have the same value
-          if (bidetFilter && item.bidet !== bidetFilter) {
-            return false;
-          }
-          // if locationAddressFilter has value, transform the locationAddressFilter string into Regex and test that against location + address.
-          if (
-            locationAddressFilter &&
-            !new RegExp(
-              `.*${locationAddressFilter.split('').join('.*')}.*`,
-              'i'
-            ).test(item._location + item._address)
-          ) {
-            return false;
-          }
-          return true;
-        }).length === 0 && <p className="text-xl font-bold">No results</p>}
+        {
+          // to show No Results if no results.
+          toiletsResults.filter((item) => {
+            if (sexFilter && item.sex !== sexFilter) {
+              return false;
+            }
+            if (bidetFilter && item.bidet !== bidetFilter) {
+              return false;
+            }
+            if (
+              locationAddressFilter &&
+              !new RegExp(
+                `.*${locationAddressFilter.split('').join('.*')}.*`,
+                'i'
+              ).test(item._location + item._address)
+            ) {
+              return false;
+            }
+            return true;
+          }).length === 0 && <p className="text-xl font-bold">No results</p>
+        }
       </div>
     </>
   );
