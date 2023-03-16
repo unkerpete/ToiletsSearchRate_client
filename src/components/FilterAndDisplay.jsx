@@ -63,12 +63,13 @@ const FilterAndDisplay = ({ userName }) => {
           <div className="text-sm sm:text-base">
             <div className="flex flex-col items-end">
               <div className="flex items-center mb-4 md:mb-2 md:mr-4 space-x-4">
-                <label className="text-gray-700" for="sex">
+                <label className="text-gray-700" htmlFor="sex">
                   Sex:
                 </label>
                 <select
                   id="sex"
                   className="border border-gray-300 rounded-md px-4 py-2"
+                  onChange={handleSexChange}
                 >
                   <option value="all sex">All</option>
                   <option value="male">Male</option>
@@ -77,12 +78,13 @@ const FilterAndDisplay = ({ userName }) => {
               </div>
 
               <div className="flex items-center mb-4 md:mb-2 md:mr-4 space-x-4">
-                <label className="text-gray-700" for="bidet">
+                <label className="text-gray-700" htmlFor="bidet">
                   Bidet:
                 </label>
                 <select
                   id="bidet"
                   className="border border-gray-300 rounded-md px-4 py-2"
+                  onChange={handleBidetChange}
                 >
                   <option value="all bidets">All</option>
                   <option value="manual">Manual</option>
@@ -94,7 +96,7 @@ const FilterAndDisplay = ({ userName }) => {
                 <input
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                   type="text"
-                  placeholder="Search by location, address, or postal code"
+                  placeholder="Filters by location, address, or postal code"
                   onChange={handleLocationPostalChange}
                 />
               </div>
@@ -136,6 +138,29 @@ const FilterAndDisplay = ({ userName }) => {
                 </div>
               );
             })}
+      </div>
+      <div>
+        {toiletsResults.filter((item) => {
+          // if sexFilter has value, filter out(return false) items that does not have the same value
+          if (sexFilter && item.sex !== sexFilter) {
+            return false;
+          }
+          // if bidetFilter has value, filter out(return false) items that does not have the same value
+          if (bidetFilter && item.bidet !== bidetFilter) {
+            return false;
+          }
+          // if locationAddressFilter has value, transform the locationAddressFilter string into Regex and test that against location + address.
+          if (
+            locationAddressFilter &&
+            !new RegExp(
+              `.*${locationAddressFilter.split('').join('.*')}.*`,
+              'i'
+            ).test(item._location + item._address)
+          ) {
+            return false;
+          }
+          return true;
+        }).length === 0 && <p className="text-xl font-bold">No results</p>}
       </div>
     </>
   );
