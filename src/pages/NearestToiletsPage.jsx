@@ -123,8 +123,8 @@ const NearestToiletsPage = () => {
             <Popup>Here's you!</Popup>
           </Marker>
           <MarkerClusterGroup>
-            {toiletResults.map((toilet) => {
-              return (
+            {toiletResults.map((toilet) => 
+              (
                 <Marker
                   position={[toilet.latitude, toilet.longitude]}
                   icon={
@@ -141,7 +141,7 @@ const NearestToiletsPage = () => {
                   </Popup>
                 </Marker>
               );
-            })}
+            )}
           </MarkerClusterGroup>
         </MapContainer>
       ) : (
